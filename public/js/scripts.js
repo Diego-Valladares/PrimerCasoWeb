@@ -1,15 +1,14 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    const notesGrid = document.getElementById('notesGrid'); // Contenedor donde se mostraran las notas
-    const createNoteBtn = document.getElementById('createNote'); // Boton para crear una nueva nota
+    const notesGrid = document.getElementById('notesGrid'); // Grid donde se mostraran las notas
     const noteForm = document.getElementById('noteForm'); // Formulario para crear/editar notas
     const noteId = document.getElementById('noteId'); // Campo oculto para almacenar el ID de la nota actual
     const title = document.getElementById('title'); // Campo para el titulo de la nota
-    const content = document.getElementById('content'); // Campo para el contenido de la nota
+    const content = document.getElementById('content'); // Campo para el contendo de la nota
     const tags = document.getElementById('tags'); // Campo para las etiquetas de la nota
     const saveNoteBtn = document.getElementById('saveNote'); // Boton para guardar la nota
-    const cancelBtn = document.getElementById('cancel'); // Botn para cancelar la edicion
-    const deleteNoteBtn = document.getElementById('deleteNote'); // Boton para eliminar la nota
+    const cancelBtn = document.getElementById('cancel'); // Boton para cancelar la edicion
+    const deleteNoteBtn = document.getElementById('deleteNote'); // Boton para elimnar la nota
 
     const apiUrl = '/notas'; // URL base de la API para las notas
 
@@ -27,12 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>${note.content}</p>
                 <p>Etiquetas: ${note.tags.join(', ')}</p>
                 <p>Creado: ${new Date(note.createdAt).toLocaleString()}</p>
-                <p>Última Modificación: ${new Date(note.updatedAt).toLocaleString()}</p>
+                <p>Ultima Modificacion: ${new Date(note.updatedAt).toLocaleString()}</p>
                 <button class="editNoteBtn" data-id="${note.id}">Editar</button>
             `;
             notesGrid.appendChild(noteDiv); // Agregamos el div al contenedor de notas
         });
-        attachEditEventListeners(); // Se agregan los listeners a los botones de edicion despues de generar las notas
+        attachEditEventListeners(); // Se agregan los listeners a los botones de edicon despues de generar las notas
     };
 
     // Funcion para cargar los datos de una nota en el formulario de edicion
@@ -56,15 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const editNoteButtons = document.querySelectorAll('.editNoteBtn'); // Se eligen todos los botones de edicion
         editNoteButtons.forEach(button => {
             button.addEventListener('click', (e) => {
-                const id = e.target.dataset.id; // Obtenemos el ID de la nota del atributo data-id
+                const id = e.target.dataset.id; // Obteemos el ID de la nota del atributo data-id
                 editNote(id); // Se llama a la funcion editNote con el ID
             });
         });
     };
 
-    // Manejo del evento de envio del formulrio
+    // Manejo del evento de envio del formulario
     noteForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Prevenimos el envio del formulario por defecto
+        e.preventDefault(); // Se previene el envio del formulario por defecto
         const noteData = {
             title: title.value, // Obtenemos el titulo del formulario
             content: content.value, // Obtenemos el contenido del formulario
@@ -80,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok) {
             fetchNotes(); // La lista de notas se actualiza despues de guardar o actualizar
             noteForm.reset(); // Se resetea el formulario
+            noteId.value = ''; // Resetear el campo noteId
             document.getElementById('formTitle').textContent = 'Crear Nota';
             saveNoteBtn.textContent = 'Guardar';
             deleteNoteBtn.style.display = 'none'; // Se esconde el boton de eliminar
@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Manejo del boton de cancelar
     cancelBtn.addEventListener('click', () => {
         noteForm.reset(); // Se reinicia el formulario
+        noteId.value = ''; // Resetear el campo noteId
         document.getElementById('formTitle').textContent = 'Crear Nota';
         saveNoteBtn.textContent = 'Guardar';
         deleteNoteBtn.style.display = 'none'; // Se oculta el boton de eliminar
@@ -101,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 fetchNotes(); // Actualizamos la lista de notas despues de eliminar
                 noteForm.reset(); // Se reinicia el formulario
+                noteId.value = ''; // Resetear el campo noteId
                 document.getElementById('formTitle').textContent = 'Crear Nota';
                 saveNoteBtn.textContent = 'Guardar';
                 deleteNoteBtn.style.display = 'none'; // Se oculta el boton de eliminar
@@ -108,15 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Manejo del boton para crear una nueva nota
-    createNoteBtn.addEventListener('click', () => {
-        noteForm.reset(); // Se reinicia el formulario
-        document.getElementById('formTitle').textContent = 'Crear Nota';
-        saveNoteBtn.textContent = 'Guardar';
-        deleteNoteBtn.style.display = 'none'; // Se oculta el boton de eliminar
-    });
-
-    fetchNotes(); // Inicializamos la lista de notas al cargar la pagina
+    fetchNotes(); // Se incializa la lista de notas al cargar la pagina
 });
+
+
 
 
