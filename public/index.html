@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Notas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div id="noteFormContainer">
+        <h1 id="formTitle">Crear Nota</h1>
+        <form id="noteForm">
+            <input type="hidden" id="noteId"> <!-- Campo escondido para almacenar el ID de la nota -->
+            <label for="title">Título:</label>
+            <input type="text" id="title" maxlength="200" required> <!-- Campo para el titulo de la nota (Max:200) -->
+            <label for="content">Contenido:</label>
+            <textarea id="content" required></textarea> <!-- Campo para el contenido de la nota -->
+            <label for="tags">Etiquetas:</label>
+            <input type="text" id="tags" maxlength="100"> <!-- Campo para las etiquetas de la nota (MAX:100) -->
+            <button type="submit" id="saveNote">Guardar</button> <!-- Boton para guardar la nota -->
+            <button type="button" id="cancel">Cancelar</button> <!-- Boton para cancelar la accion -->
+            <button type="button" id="deleteNote" style="display:none;">Eliminar</button>
+        </form>
+    </div>
+
+    <h1>Notas</h1>
+    <div id="notesGrid"></div> <!-- Contenedor para la "grid" de notas -->
+
+    <script src="js/scripts.js"></script> <!-- Archivo JavaScript para manejar la logica de la interfaz -->
+</body>
+
+</html>
+
+</html>

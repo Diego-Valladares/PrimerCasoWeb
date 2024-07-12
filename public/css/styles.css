@@ -1,0 +1,38 @@
+#notesGrid {
+    display: grid; /* Se usa el sistema de grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Crea columnas que se ajustan auto con un min de 200 px*/
+    gap: 10px;
+    padding: 20px;
+}
+
+.note {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+    margin: auto;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button#saveNote {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button#cancel,
+button#deleteNote {
+    background-color: #f44336;
+    color: white;
+}
