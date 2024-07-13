@@ -1,12 +1,12 @@
-const express = require('express'); // Libreria de express
-const { v4: uuidv4 } = require('uuid'); // Libreria para generar IDs únicos
-const path = require('path'); // Libreria para manejar rutas de archivos
+const express = require('express'); // Se importa la libreria de express
+const { v4: uuidv4 } = require('uuid'); // Se importa la libreria para generar IDs unicos
+const path = require('path'); // Se importa la libreria para manejar rutas de archivos
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Puerto del servidor
+const PORT = process.env.PORT || 3000; // Se define el puerto del servidor
 
 app.use(express.json()); // Middleware para parsear el JSON en las peticiones
-app.use(express.static('public')); // Middleware para ver archivos estaticos desde la carpeta 'public'
+app.use(express.static(path.join(__dirname, 'public'))); // Middleware para servir archivos estáticos desde la carpeta 'public'
 
 // Array para almacenar las notas en memoria
 let notes = [];
@@ -16,33 +16,32 @@ app.get('/notas', (req, res) => {
     res.json(notes); // Se envian las notas en formato JSON
 });
 
-// Endpoint para obtener una nota por su ID, el ID es invisible para el usuario, pero el sistema si lo almacena
+// Endpoint para obtener una nota por su ID
 app.get('/notas/:id', (req, res) => {
     const note = notes.find(n => n.id === req.params.id);
     if (note) {
-        res.json(note); // Si se encuentra la nota, se responde con la nota 
+        res.json(note); // Si se encuentra la nota, se responde con la nota
     } else {
-        res.status(404).send('Nota no encontrada'); // Si no se encuentra, se responde con un error 404
+        res.status(404).json({ error: 'Notas no encontradas' }); // Si no se encuentra, se responde con un error 404
     }
 });
 
 // Endpoint para crear una nueva nota
 app.post('/notas', (req, res) => {
     const { title, content, tags } = req.body;
-    // Se valida que el titulo y el contenido no esten vacios
     if (!title || !content) {
-        return res.status(400).send('El titulo y el contenido son obligatorios');
+        return res.status(400).json({ error: 'El titulo y el contenido son obligatorios' }); // Validacion de campos obligatorios
     }
-    // Se crea una nueva nota con los datos proporcionados
     const newNote = {
-        id: uuidv4(), // Un ID unico por medio de la libreria
+        id: uuidv4(), // Se genera un ID unico
         title,
         content,
-        tags: tags || [], // Si no se proporcionan etiquetas, se asigna un array vacio, porque no son obligatorias
-        createdAt: new Date(), // Fecha de creacion 
-        updatedAt: new Date()  // Fecha de ultima modificacion 
+        tags: tags || [], // Se asigna un array vacio si no se proporcionan etiquetas
+        createdAt: new Date(), // Se asigna la fecha de creacion
+        updatedAt: new Date()  // Se asigna la fecha de ultima modificacion
     };
     notes.push(newNote); // Se agrega la nueva nota al array
+    console.log('Nota creada:', newNote); // Log para depuracion
     res.status(201).json(newNote); // Se responde con la nueva nota creada
 });
 
@@ -51,21 +50,25 @@ app.put('/notas/:id', (req, res) => {
     const { title, content, tags } = req.body;
     const note = notes.find(n => n.id === req.params.id);
     if (note) {
-        // Se actializan los campos de la nota
-        note.title = title || note.title;
-        note.content = content || note.content;
-        note.tags = tags || note.tags;
-        note.updatedAt = new Date(); // Actualizamos la fecha de ultima modificacion
+        if (!title || !content) {
+            return res.status(400).json({ error: 'El titulo y el contenido son obligatorios' }); // Validacion de campos obligatorios
+        }
+        note.title = title; // Se actualiza el titulo
+        note.content = content; // Se actualiza el contenido
+        note.tags = tags || note.tags; // Se actualizan las etiquetas si se proporcionan
+        note.updatedAt = new Date(); // Se actualiza la fecha de ultima modificacion
+        console.log('Nota actualizada:', note); // Log para depuracion
         res.json(note); // Se responde con la nota actualizada
     } else {
-        res.status(404).send('Nota no encontrada'); // Si no se encuentra, respondemos con un error 404
+        res.status(404).json({ error: 'Nota no encontrada' }); // Si no se encuentra, se responde con un error 404
     }
 });
 
 // Endpoint para eliminar una nota por su ID
 app.delete('/notas/:id', (req, res) => {
     notes = notes.filter(n => n.id !== req.params.id); // Se filtra el array para eliminar la nota
-    res.status(204).send(); // Respondemos con un estado 204 (sin contenido)
+    console.log(`Nota con ID ${req.params.id} eliminada`); // Log para depuracion
+    res.status(204).send(); // Se responde con un estado 204 (sin contenido)
 });
 
 // Obtener el archivo index.html en la ruta raiz
@@ -73,13 +76,12 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Obtener el archivo edit.html en la ruta raiz
-app.get('/', (req, res) => {
+// Obtener el archivo edit.html en la ruta /edit/:id
+app.get('/edit/:id', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'edit.html'));
 });
 
-// Iniciamos el servidor
+// Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Server is active on PORT: `+PORT);
+    console.log(`Server is active on PORT: ${PORT}`);
 });
-

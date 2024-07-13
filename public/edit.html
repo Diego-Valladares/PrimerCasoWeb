@@ -5,25 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport">
     <title>Editar Nota</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Ruta absoluta al archivo de estilos CSS -->
 </head>
 
 <body>
-    <h1 id="formTitle">Crear Nota</h1>
-    <form id="noteForm">
-        <input type="hidden" id="noteId"> <!-- Campo escondido para almacenar el ID de la nota -->
-        <label for="title">Título:</label>
-        <input type="text" id="title" maxlength="200" required> <!-- Campo para el titulo de la nota (Max:200) -->
-        <label for="content">Contenido:</label>
-        <textarea id="content" required></textarea> <!-- Campo para el contenido de la nota -->
-        <label for="tags">Etiquetas:</label>
-        <input type="text" id="tags" maxlength="100"> <!-- Campo para las etiquetas de la nota (MAX:100) -->
-        <button type="submit" id="saveNote">Guardar</button> <!-- Boton para guardar la nota -->
-        <button type="button" id="cancel">Cancelar</button> <!-- Boton para cancelar la accion -->
-        <button type="button" id="deleteNote" style="display:none;">Eliminar</button>
-        <!-- Boton para eliminar la nota (solo visible en modo edicion) -->
-    </form>
-    <script src="js/scripts.js"></script> <!-- Archivo JavaScript para manejar la logica de la interfaz -->
+    <div class="containerEdit">
+        <h1 id="formTitle">Editar Nota</h1>
+        <form id="noteForm">
+            <input type="hidden" id="noteId"> <!-- Campo oculto para almacenar el ID de la nota -->
+            <label for="title">Titulo:</label>
+            <input type="text" id="title" maxlength="200" required> <!-- Campo para el titulo de la nota -->
+            <span id="titleError" class="error-message"></span> <!-- Mensaje de error para el titulo -->
+            <label for="content">Contenido:</label>
+            <textarea id="content" required></textarea> <!-- Campo para el contenido de la nota -->
+            <label for="tags">Etiquetas:</label>
+            <input type="text" id="tags" maxlength="100"> <!-- Campo para las etiquetas de la nota -->
+            <span id="tagsError" class="error-message"></span> <!-- Mensaje de error para las etiquetas -->
+            <button type="submit" id="saveNote">Actualizar</button> <!-- Boton para guardar la nota -->
+            <button type="button" id="cancel">Cancelar</button> <!-- Boton para cancelar la edicion -->
+            <button type="button" id="deleteNote">Eliminar</button> <!-- Boton para eliminar la nota -->
+        </form>
+    </div>
+    <script src="/js/scripts.js"></script> <!-- Ruta absoluta al archivo JavaScript que maneja la logica -->
 </body>
 
 </html>

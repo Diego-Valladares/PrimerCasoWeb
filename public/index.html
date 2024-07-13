@@ -5,31 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport">
     <title>Notas</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Ruta absoluta al archivo de estilos CSS -->
 </head>
 
 <body>
-    <h1>Notas</h1>
-    <div id="createNoteContainer">
-        <button id="createNoteBtn">Crear Nota</button> <!-- Boton para crear una nueva nota -->
+    <div class="container">
+        <h1>Notas</h1>
+        <div id="searchContainer">
+            <input type="text" id="searchInput" placeholder="Buscar por titulo o etiqueta...">
+            <!-- Barra de busqueda -->
+        </div>
+        <div id="createNoteContainer">
+            <button id="createNoteBtn">Crear Nota</button> <!-- Boton para crear una nueva nota -->
+        </div>
+        <div id="noteFormContainer" style="display: none;"> <!-- Contenedor del formulario oculto por defecto -->
+            <h1 id="formTitle">Crear Nota</h1>
+            <form id="noteForm">
+                <input type="hidden" id="noteId"> <!-- Campo oculto para almacenar el ID de la nota -->
+                <label for="title">Titulo:</label>
+                <input type="text" id="title" maxlength="200" required> <!-- Campo para el titulo de la nota -->
+                <span id="titleError" class="error-message"></span> <!-- Mensaje de error para el titulo -->
+                <label for="content">Contenido:</label>
+                <textarea id="content" required></textarea> <!-- Campo para el contenido de la nota -->
+                <label for="tags">Etiquetas:</label>
+                <input type="text" id="tags" maxlength="100"> <!-- Campo para las etiquetas de la nota -->
+                <span id="tagsError" class="error-message"></span> <!-- Mensaje de error para las etiquetas -->
+                <button type="submit" id="saveNote">Guardar</button> <!-- Boton para guardar la nota -->
+                <button type="button" id="cancel">Cancelar</button> <!-- Boton para cancelar la creacion -->
+                <button type="button" id="deleteNote" style="display:none;">Eliminar</button> 
+                <!-- Para esconder el formulario de creacion -->
+            </form>
+        </div>
+        <div id="notesGrid"></div> <!-- Contenedor para la "grid" de notas -->
     </div>
-    <div id="noteFormContainer" style="display: none;"> <!-- Contenedor del formulario oculto por defecto -->
-        <h1 id="formTitle">Crear Nota</h1>
-        <form id="noteForm">
-            <input type="hidden" id="noteId">
-            <label for="title">Titulo:</label>
-            <input type="text" id="title" maxlength="200" required>
-            <label for="content">Contenido:</label>
-            <textarea id="content" required></textarea>
-            <label for="tags">Etiquetas:</label>
-            <input type="text" id="tags" maxlength="100">
-            <button type="submit" id="saveNote">Guardar</button>
-            <button type="button" id="cancel">Cancelar</button>
-            <button type="button" id="deleteNote" style="display:none;">Eliminar</button>
-        </form>
-    </div>
-    <div id="notesGrid"></div> <!-- Contenedor para la "grid" de notas -->
-    <script src="js/scripts.js"></script>
+    <script src="/js/scripts.js"></script> <!-- Ruta absoluta al archivo JavaScript que maneja la logica -->
 </body>
 
 </html>
