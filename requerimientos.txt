@@ -1,0 +1,82 @@
+Aqui va una como un "checklist" de todo lo que se pide hacer:
+
+Estructura de Notas:
+
+• ID de la Nota: Identificador único para cada nota (tipo entero, puede usar una
+librería npm para generar id aleatorio). LISTO
+
+• Título: Título de la nota (tipo cadena de texto, máximo 200 caracteres, obligatorio). LISTO
+
+• Contenido: Contenido de la nota (tipo cadena de texto, obligatorio). LISTO
+
+• Fecha de Creación: Fecha y hora en que se creó la nota (tipo fecha y hora,
+generado automáticamente). LISTO
+
+• Fecha de Última Modificación: Fecha y hora en que se modificó la nota por última
+vez (tipo fecha y hora, generado automáticamente). LISTO
+
+• Etiquetas: Lista de etiquetas asociadas a la nota (arreglo de cadenas de texto,
+máximo 100 caracteres por etiqueta). LISTO
+
+
+--------- / ----------
+
+Diseño de la Interfaz de Usuario (30 pts):
+
+• Página Principal (home):
+    o Grilla de notas existentes (título, fecha de creación/modificación,
+    etiquetas). LISTO
+    o Botón para crear una nueva nota. LISTO
+    o Campo de búsqueda para filtrar notas por título o etiquetas (Opcional). LISTO y sirve para ambos
+    o Se recomienda el uso del Grid system. LISTO
+
+• Página de Edición/Creación de Notas (edit):
+    o Formulario con campos para título, contenido y etiquetas. LISTO
+    o Botones para guardar/actualizar y cancelar. LISTO
+    o Opción para eliminar la nota (solo en modo edición). LISTO
+    o Se recomienda el uso de Flexbox. Lo utilice pero dentro del body, para usarlo en ambos html
+
+
+--------- / ----------
+
+
+Funcionalidades del Servidor (50 pts):
+
+• Navegación:
+    o GET /: Retorna el html del home con las notas. LISTO
+
+• API REST:
+    o GET /notas: Obtener todas las notas. LISTO
+    o GET /notas/:id: Obtener una nota por su ID. LISTO
+    o POST /notas: Crear una nueva nota. LISTO
+    o PUT /notas/:id: Actualizar una nota existente. LISTO
+    o DELETE /notas/:id: Eliminar una nota. LISTO
+
+• Lógica de Negocio:
+    o Validación de datos en las solicitudes (título no vacío, etc.). LISTO
+    o Almacenamiento de notas en memoria (utilizando un array un objeto). LISTO
+    o Generación de IDs únicos para las notas. LISTO (se puede verificar por la consola)
+    o Actualización automática de fechas de creación/modificación. LISTO
+
+
+--------- / ----------
+
+
+Funcionalidades del Cliente (50 pts):
+
+• Interacción con la API:
+    o Realizar solicitudes HTTP a los endpoints de la API para obtener, crear,
+    actualizar y eliminar notas. LISTO
+    o Manejo de respuestas de la API (éxito, errores)(Opcional). Lo intente hacer pero creo que no me funciono como se queria
+
+• Actualización de la Interfaz:
+    o Actualizar la lista de notas después de cada operación CRUD. LISTO
+    o Mostrar mensajes de éxito o error al usuario. LISTO 
+
+• Manejo de Eventos:
+    o Responder a clics en botones y enlaces. LISTO (aunque solo hay botones, no tiene enlaces)
+    o Manejar el envío de formularios. LISTO
+    o Implementar la búsqueda y filtrado de notas (Opcional). LISTO
+
+
+--------- / ----------

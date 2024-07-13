@@ -1,0 +1,126 @@
+Documentacion de la API:
+
+Obtener todas las notas
+    URL: /notas
+
+    Metodo: GET
+
+    Descripcion: Este endpoint obtiene todas las notas almacenadas.
+
+    Respuesta: 
+    {
+        "id": "string", 
+        "title": "string",
+        "content": "string",
+        "tags": ["string"], -- Array porque puede ser mas de 1 tag
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
+
+Obtener una nota por su ID
+    URL: /notas/:id
+
+    Metodo: GET
+
+    Descripcion: Este endpoint obtiene una nota específica mediante su ID.
+
+    Parametros de URL: id (string): ID de la nota.
+
+    Respuesta:
+    {
+        "id": "string",
+        "title": "string",
+        "content": "string",
+        "tags": ["string"],
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
+
+    Tambien hay una Respuesta de error, pero termine no usandola porque siempre se encuentra alguna nota.
+    No la quite porque si no esta roto mejor no arreglarlo.
+
+
+Crear una nueva nota
+    URL: /notas
+
+    Metodo: POST
+
+    Descripcion: Este endpoint crea una nueva nota.
+
+    Formulario de Solicitud:
+    {
+        "title": "titulo",
+        "content": "contenido de la nota",
+        "tags": ["etiqueta1", "etiqueta2"...]
+    }
+
+    Respuesta: 
+    {
+        "id": "string",
+        "title": "string",
+        "content": "string",
+        "tags": ["string"],
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
+
+    Respuesta de Error:
+    {
+        "error": "El titulo y el contenido son obligatorios"
+    }
+
+
+Actualizar una nota existente
+    URL: /notas/:id
+
+    Metodo: PUT
+
+    Descripcion: Este endpoint actualiza una nota existente mediante su ID.
+
+    Formulario de Solicitud:
+    {
+        "title": "titulo",
+        "content": "contenido de la nota",
+        "tags": ["etiqueta1", "etiqueta2"...]
+    }
+
+    Respuesta: 
+    {
+        "id": "string",
+        "title": "string",
+        "content": "string",
+        "tags": ["string"],
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
+
+    Respuesta de Error:
+    {
+        "error": "El titulo y el contenido son obligatorios"
+    }
+
+    Tambien hay otro error "nota no encontrada" pero como siempre se encuentran notas no se activa nunca.
+
+
+Eliminar una nota por su ID
+    URL: /notas/:id
+
+    Metodo: DELETE
+
+    Descripcion: Este endpoint elimina una nota especifica mediante su ID.
+
+    Parametros de Solicitud: "id" de la nota
+
+    Respuesta: 204 no content
+
+    Tambien hay otro error "nota no encontrada" pero como siempre se encuentran notas no se activa nunca.
+
+--- / ---
+FIN DE DOCUMENTACION
+--- / ---
+
+
+Estos errores de "nota no encontrada" fueron hechos con la idea de que la busqueda no iba a ser dinamica, osea, tenia que poner el nombre
+de la nota o el tag y luego darle enter en la barra de busqueda, entonces si no se encontraba mandaba ese error, al final no termine
+haciendo esto, si no que descubri por internet como hacer la barra de busqueda actualizar dinamicamente para mostrar lo que estaba buscando
+lo cual hace estos errores obsoletos. No los quite simplemente porque no estan causando error, y probablemente rompa algo si los quito.

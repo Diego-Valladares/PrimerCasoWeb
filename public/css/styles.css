@@ -65,7 +65,7 @@ h1 {
     background-color: darkgreen;
 }
 
-/* Grid de notas, 300px aproximadamente 5 notas maximo por fila */
+/* Grid de notas, 300px aproximadamente 4 notas maximo por fila */
 #notesGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
